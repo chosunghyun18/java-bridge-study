@@ -1,17 +1,41 @@
 package bridge.controller;
 
 import bridge.domain.BridgeMaker;
+import bridge.domain.BridgeNumberGenerator;
+
+import bridge.domain.NumberGenerator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 public class BridgeGame {
-    ViewController viewController = new ViewController();
+    private List<String> bridge ;
+    private int bridgeSize;
+    private final OutputController outputController;
+    private final InputController inputController;
     private BridgeGame() {
-
+        outputController = new OutputController();
+        bridge = new ArrayList<>();
+        inputController = new InputController();
+        outputController.printStartInfoMessage();
+        makeBridge();
     }
-    public void initGame(){
+    public static BridgeGame startGame(){
+        return new BridgeGame();
+    }
 
+    public List<String> getBridge() {
+        return bridge;
+    }
+
+    private void makeBridge() {
+        bridgeSize = inputController.readBridgeSize();
+        BridgeNumberGenerator numberGenerator = new NumberGenerator(bridgeSize);
+        BridgeMaker bridgeMaker = new BridgeMaker(numberGenerator);
+        bridge = bridgeMaker.makeBridge(bridgeSize);
     }
 
     /**

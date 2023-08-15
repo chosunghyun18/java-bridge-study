@@ -5,6 +5,7 @@ import bridge.domain.BridgeNumberGenerator;
 
 import bridge.domain.NumberGenerator;
 
+import bridge.domain.UserResult;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +13,16 @@ import java.util.List;
  * 다리 건너기 게임을 관리하는 클래스
  */
 public class BridgeGame {
-    private List<String> bridge ;
+    private UserResult userResult;
+    private List<String> answerBridge ;
     private int bridgeSize;
     private final OutputController outputController;
     private final InputController inputController;
     private BridgeGame() {
         outputController = new OutputController();
-        bridge = new ArrayList<>();
+        answerBridge = new ArrayList<>();
         inputController = new InputController();
+        userResult = new UserResult();
         outputController.printStartInfoMessage();
         makeBridge();
     }
@@ -27,30 +30,42 @@ public class BridgeGame {
         return new BridgeGame();
     }
 
-    public List<String> getBridge() {
-        return bridge;
-    }
-
     private void makeBridge() {
         bridgeSize = inputController.readBridgeSize();
         BridgeNumberGenerator numberGenerator = new NumberGenerator(bridgeSize);
         BridgeMaker bridgeMaker = new BridgeMaker(numberGenerator);
-        bridge = bridgeMaker.makeBridge(bridgeSize);
+        answerBridge = bridgeMaker.makeBridge(bridgeSize);
+    }
+    public void processGame() {
+        String retryStaus = "R";
+        while (retryStaus.equals("R")) {
+            userResult.tryGamePlay();
+            boolean clearStage = moveOverBridge();
+            if(clearStage) retryStaus = "Q";
+            if(!clearStage) {
+                retryStaus = retry();
+            }
+        }
     }
 
-    /**
-     * 사용자가 칸을 이동할 때 사용하는 메서드
-     * <p>
-     * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    public void move() {
+    private boolean moveOverBridge() {
+        int inputCount = 0 ;
+        while (bridgeSize != inputCount) {
+            String moveCommand = inputController.readMoving();
+            if(!move(moveCommand,inputCount)) return false;
+        }
+        userResult.clearGame();
+        return true;
     }
 
-    /**
-     * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-     * <p>
-     * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    public void retry() {
+    private boolean move(String moveCommand,int inputConut) {
+        return userResult.matchBridge(moveCommand,answerBridge,inputConut);
+    }
+
+    private String retry() {
+        return inputController.readGameCommand();
+    }
+    public void showResult() {
+        outputController.printResult(userResult);
     }
 }

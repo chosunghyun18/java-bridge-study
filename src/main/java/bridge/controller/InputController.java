@@ -22,8 +22,10 @@ public class InputController {
 
     public String readMoving() {
         try{
+            outputController.printMoveInfoMessage();
             return inputView.readMoving();
         }catch (IllegalArgumentException e) {
+            outputController.printMoveInfoMessage();
             System.out.println(e);
         return readMoving();
         }
@@ -32,9 +34,11 @@ public class InputController {
 
     public String readGameCommand() {
         try{
+            outputController.printRestartInputInfoMessage();
             return inputView.readGameCommand();
         }catch (IllegalArgumentException e) {
             System.out.println(e);
+            outputController.printRestartInputInfoMessage();
             return readGameCommand();
         }
     }

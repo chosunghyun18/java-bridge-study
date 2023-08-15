@@ -6,6 +6,7 @@ public class Application {
 
     public static void main(String[] args) {
         BridgeGame bridgeGame = BridgeGame.startGame();
-        System.out.println(bridgeGame.getBridge());
+        bridgeGame.processGame();
+        bridgeGame.showResult();
     }
 }

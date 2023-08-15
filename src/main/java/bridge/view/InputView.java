@@ -27,7 +27,7 @@ public class InputView {
     }
 
     public String readMoving() {
-        List<Character> canRead = new ArrayList<>(Arrays.asList('U','D'));
+        List<String> canRead = new ArrayList<>(Arrays.asList("U","D"));
         String input =  Console.readLine();
         if(input.length() != 1) throw new IllegalArgumentException("[Eroor] over size");
         if(canRead.contains(input)) return input;

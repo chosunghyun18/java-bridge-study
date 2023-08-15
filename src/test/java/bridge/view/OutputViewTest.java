@@ -1,10 +1,9 @@
 package bridge.view;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import bridge.UserResult.UserResultTest;
 import bridge.domain.UserResult;
-import bridge.dto.ResponseMapDto;
+
+import bridge.dto.ResponseUserBridgeDto;
 import org.junit.jupiter.api.Test;
 
 class OutputViewTest {
@@ -12,7 +11,7 @@ class OutputViewTest {
     OutputView outputView = new OutputView() ;
     @Test
     void printMap_Test() {
-        ResponseMapDto responseMapDto = new ResponseMapDto(userResult);
+        ResponseUserBridgeDto responseMapDto = new ResponseUserBridgeDto(userResult);
         outputView.printMap(responseMapDto);
     }
 

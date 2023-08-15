@@ -2,7 +2,7 @@ package bridge.controller;
 
 import bridge.domain.UserResult;
 
-import bridge.dto.ResponseMapDto;
+import bridge.dto.ResponseUserBridgeDto;
 import bridge.dto.ResponseResultDto;
 import bridge.view.OutputView;
 
@@ -25,7 +25,7 @@ public class OutputController {
     }
 
     public void printUserBridge(UserResult userResult) {
-        ResponseMapDto response = new ResponseMapDto(userResult);
+        ResponseUserBridgeDto response = new ResponseUserBridgeDto(userResult);
         outputView.printMap(response);
     }
 

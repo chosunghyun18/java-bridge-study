@@ -1,6 +1,8 @@
 package bridge.view;
 
 import bridge.domain.UserResult;
+import bridge.dto.ResponseMapDto;
+import bridge.dto.ResponseResultDto;
 import java.util.List;
 
 /**
@@ -24,9 +26,9 @@ public class OutputView {
      * <p>
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public void printMap(List<String> up ,List<String> down ) {
-        System.out.println(up.toString().replace(", ","|"));
-        System.out.println(down.toString().replace(", ","|"));
+    public void printMap(ResponseMapDto response) {
+        System.out.println(response.getUserUpBridge().toString().replace(", ","|"));
+        System.out.println(response.getUserDownBridge().toString().replace(", ","|"));
     }
 
     /**
@@ -34,10 +36,11 @@ public class OutputView {
      * <p>
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public void printResult(UserResult userResult) {
+    public void printResult(ResponseResultDto response) {
+        System.out.println("게임 성공 여부: "+response.getUserGameClear());
+        System.out.println("총 시도한 횟수: "+response.getUserGameTry());
+    }
+    public void printResultStartMessage() {
         System.out.println("최종 게임 결과");
-        printMap(userResult.getUpBridge(),userResult.getDownBridge()) ;
-        System.out.println("게임 성공 여부: "+userResult.getGameClear());
-        System.out.println("총 시도한 횟수: "+userResult.getGameTry());
     }
 }

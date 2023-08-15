@@ -1,10 +1,11 @@
 package bridge.UserResult;
 
+import bridge.domain.UserResult;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserResultTest{
+public class UserResultTest extends UserResult {
     private List<String> upBridge;
     private List<String> downBridge;
     private String gameClear ;

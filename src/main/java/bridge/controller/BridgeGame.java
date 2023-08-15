@@ -62,7 +62,7 @@ public class BridgeGame {
 
     private boolean move(String moveCommand,int inputConut) {
         boolean notCheck = userResult.matchBridge(moveCommand,answerBridge,inputConut);
-        outputController.printMap(userResult.getUpBridge(),userResult.getDownBridge());
+        outputController.printMap(userResult);
         return  notCheck;
     }
 

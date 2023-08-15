@@ -2,8 +2,9 @@ package bridge.controller;
 
 import bridge.domain.UserResult;
 
+import bridge.dto.ResponseMapDto;
+import bridge.dto.ResponseResultDto;
 import bridge.view.OutputView;
-import java.util.List;
 
 public class OutputController {
     private final OutputView outputView;
@@ -23,12 +24,16 @@ public class OutputController {
         outputView.printRestartInputInfoMessage();
     }
 
-    public void printMap(List<String> up ,List<String> down ) {
-        outputView.printMap(up,down);
+    public void printMap(UserResult userResult) {
+        ResponseMapDto response = new ResponseMapDto(userResult);
+        outputView.printMap(response);
     }
 
     public void printResult(UserResult userResult) {
-        outputView.printResult(userResult);
+        outputView.printResultStartMessage();
+        ResponseResultDto response = new ResponseResultDto(userResult);
+        printMap(userResult);
+        outputView.printResult(response);
     }
 
 }

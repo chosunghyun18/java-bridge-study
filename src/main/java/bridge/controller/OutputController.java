@@ -24,7 +24,7 @@ public class OutputController {
         outputView.printRestartInputInfoMessage();
     }
 
-    public void printMap(UserResult userResult) {
+    public void printUserBridge(UserResult userResult) {
         ResponseMapDto response = new ResponseMapDto(userResult);
         outputView.printMap(response);
     }
@@ -32,7 +32,7 @@ public class OutputController {
     public void printResult(UserResult userResult) {
         outputView.printResultStartMessage();
         ResponseResultDto response = new ResponseResultDto(userResult);
-        printMap(userResult);
+        printUserBridge(userResult);
         outputView.printResult(response);
     }
 

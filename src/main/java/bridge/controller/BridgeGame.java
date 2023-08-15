@@ -13,66 +13,67 @@ import java.util.List;
  * 다리 건너기 게임을 관리하는 클래스
  */
 public class BridgeGame {
-    private UserResult userResult;
+    private final UserResult user;
     private List<String> answerBridge ;
-    private int bridgeSize;
+    private int bridgeLength;
     private final OutputController outputController;
     private final InputController inputController;
     private BridgeGame() {
         outputController = new OutputController();
         answerBridge = new ArrayList<>();
         inputController = new InputController();
-        userResult = new UserResult();
+        user = new UserResult();
         outputController.printStartInfoMessage();
         makeBridge();
     }
-    public static BridgeGame startGame(){
+    public static BridgeGame startGame() {
         return new BridgeGame();
     }
 
     private void makeBridge() {
         outputController.printBridgeSizeInfoMessage();
-        bridgeSize = inputController.readBridgeSize();
-        BridgeNumberGenerator numberGenerator = new NumberGenerator(bridgeSize);
+        bridgeLength = inputController.readBridgeSize();
+        BridgeNumberGenerator numberGenerator = new NumberGenerator(bridgeLength);
         BridgeMaker bridgeMaker = new BridgeMaker(numberGenerator);
-        answerBridge = bridgeMaker.makeBridge(bridgeSize);
-        System.out.println(answerBridge);
+        answerBridge = bridgeMaker.makeBridge(bridgeLength);
     }
     public void processGame() {
-        String retryStaus = "R";
-        while (retryStaus.equals("R")) {
-            userResult.tryGamePlay();
+        String gameCommand = "R";
+        while (gameCommand.equals("R")) {
+            initUserResult();
             boolean clearStage = moveOverBridge();
-            if(clearStage) retryStaus = "Q";
-            if(!clearStage) {
-                retryStaus = retry();
-            }
+            if(clearStage) gameCommand = "Q";
+            if(!clearStage) gameCommand = retry();
         }
+    }
+
+    private void initUserResult() {
+        user.initBridgeForGame();
     }
 
     private boolean moveOverBridge() {
-        int inputCount = 0 ;
-        while (bridgeSize != inputCount) {
+        int round = 0 ;
+        while (bridgeLength != round) {
             outputController.printMoveInfoMessage();
             String moveCommand = inputController.readMoving();
-            if(!move(moveCommand,inputCount)) return false;
-            inputCount++;
+            if(!move(moveCommand,round)) return false;
+            round++;
         }
-        userResult.clearGame();
+        user.clearGame();
         return true;
     }
 
-    private boolean move(String moveCommand,int inputConut) {
-        boolean notCheck = userResult.matchBridge(moveCommand,answerBridge,inputConut);
-        outputController.printMap(userResult);
-        return  notCheck;
+    private boolean move(String moveCommand,int round) {
+        boolean canGo = user.matchBridge(moveCommand,answerBridge,round);
+        outputController.printUserBridge(user);
+        return  canGo;
     }
 
     private String retry() {
         outputController.printRestartInputInfoMessage();
         return inputController.readGameCommand();
     }
-    public void showResult() {
-        outputController.printResult(userResult);
+    public void showGameResult() {
+        outputController.printResult(user);
     }
 }

@@ -8,11 +8,11 @@ public class UserResult {
     private List<String> upBridge;
     private List<String> downBridge;
     private String gameClear;
-    private int gameTry;
+    private int totalGameTry;
 
     public UserResult() {
         this.gameClear = "실패";
-        this.gameTry = 0;
+        this.totalGameTry = 0;
     }
 
     public boolean matchBridge(String command, List<String> answerBridge, int checkIndex) {
@@ -43,10 +43,10 @@ public class UserResult {
             downBridge.add(" X ");
         }
     }
-    public void tryGamePlay() {
+    public void initBridgeForGame() {
         this.upBridge = new ArrayList<>();
         this.downBridge = new ArrayList<>();
-        gameTry++;
+        totalGameTry++;
     }
 
     public void clearGame() {
@@ -58,7 +58,7 @@ public class UserResult {
     }
 
     public int getGameTryForResponse() {
-        return gameTry;
+        return totalGameTry;
     }
 
     public List<String> getUpBridgeForResponse() {

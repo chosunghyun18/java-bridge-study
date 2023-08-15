@@ -7,6 +7,6 @@ public class Application {
     public static void main(String[] args) {
         BridgeGame bridgeGame = BridgeGame.startGame();
         bridgeGame.processGame();
-        bridgeGame.showResult();
+        bridgeGame.showGameResult();
     }
 }

@@ -8,8 +8,8 @@ public class ResponseMapDto {
         private final List<String> userDownBridge;
 
         public ResponseMapDto(UserResult userResult) {
-            this.userUpBridge = userResult.getUpBridge();
-            this.userDownBridge = userResult.getDownBridge();
+            this.userUpBridge = userResult.getUpBridgeForResponse();
+            this.userDownBridge = userResult.getDownBridgeForResponse();
         }
 
     public List<String> getUserUpBridge() {

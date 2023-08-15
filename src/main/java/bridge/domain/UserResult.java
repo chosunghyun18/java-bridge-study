@@ -53,19 +53,19 @@ public class UserResult {
         gameClear = "성공";
     }
 
-    public String getGameClear() {
+    public String getGameClearForResponse() {
         return gameClear;
     }
 
-    public int getGameTry() {
+    public int getGameTryForResponse() {
         return gameTry;
     }
 
-    public List<String> getUpBridge() {
+    public List<String> getUpBridgeForResponse() {
         return upBridge;
     }
 
-    public List<String> getDownBridge() {
+    public List<String> getDownBridgeForResponse() {
         return downBridge;
     }
 }

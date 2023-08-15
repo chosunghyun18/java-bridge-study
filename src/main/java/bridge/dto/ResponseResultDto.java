@@ -6,8 +6,8 @@ public class ResponseResultDto {
     private final String userGameClear;
     private final int userGameTry;
     public ResponseResultDto(UserResult userResult){
-        this.userGameClear =userResult.getGameClear();
-        this.userGameTry = userResult.getGameTry();
+        this.userGameClear =userResult.getGameClearForResponse();
+        this.userGameTry = userResult.getGameTryForResponse();
     }
 
     public String getUserGameClear() {

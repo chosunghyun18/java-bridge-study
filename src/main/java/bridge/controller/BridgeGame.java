@@ -31,6 +31,7 @@ public class BridgeGame {
     }
 
     private void makeBridge() {
+        outputController.printBridgeSizeInfoMessage();
         bridgeSize = inputController.readBridgeSize();
         BridgeNumberGenerator numberGenerator = new NumberGenerator(bridgeSize);
         BridgeMaker bridgeMaker = new BridgeMaker(numberGenerator);
@@ -52,6 +53,7 @@ public class BridgeGame {
     private boolean moveOverBridge() {
         int inputCount = 0 ;
         while (bridgeSize != inputCount) {
+            outputController.printMoveInfoMessage();
             String moveCommand = inputController.readMoving();
             if(!move(moveCommand,inputCount)) return false;
             inputCount++;
@@ -67,6 +69,7 @@ public class BridgeGame {
     }
 
     private String retry() {
+        outputController.printRestartInputInfoMessage();
         return inputController.readGameCommand();
     }
     public void showResult() {

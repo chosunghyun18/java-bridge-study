@@ -1,19 +1,19 @@
-package bridge.domain;
+package bridge.UserResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserResult {
+public class UserResultTest{
     private List<String> upBridge;
     private List<String> downBridge;
     private String gameClear ;
     private int gameTry ;
-    public UserResult() {
-//        this.upBridge  =  new ArrayList<>(Arrays.asList("   "," X "));
-//        this.downBridge =new ArrayList<>(Arrays.asList(" O ","   "));
-//        this.gameClear = "성공";
-//        this.gameTry = 2 ;
+    public UserResultTest() {
+        this.upBridge  =  new ArrayList<>(Arrays.asList("   "," X "));
+        this.downBridge =new ArrayList<>(Arrays.asList(" O ","   "));
+        this.gameClear = "성공";
+        this.gameTry = 2 ;
     }
 
     public String getGameClear() {

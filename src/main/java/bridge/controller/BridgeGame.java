@@ -35,6 +35,7 @@ public class BridgeGame {
         BridgeNumberGenerator numberGenerator = new NumberGenerator(bridgeSize);
         BridgeMaker bridgeMaker = new BridgeMaker(numberGenerator);
         answerBridge = bridgeMaker.makeBridge(bridgeSize);
+        System.out.println(answerBridge);
     }
     public void processGame() {
         String retryStaus = "R";
@@ -53,13 +54,16 @@ public class BridgeGame {
         while (bridgeSize != inputCount) {
             String moveCommand = inputController.readMoving();
             if(!move(moveCommand,inputCount)) return false;
+            inputCount++;
         }
         userResult.clearGame();
         return true;
     }
 
     private boolean move(String moveCommand,int inputConut) {
-        return userResult.matchBridge(moveCommand,answerBridge,inputConut);
+        boolean notCheck = userResult.matchBridge(moveCommand,answerBridge,inputConut);
+        outputController.printMap(userResult.getUpBridge(),userResult.getDownBridge());
+        return  notCheck;
     }
 
     private String retry() {

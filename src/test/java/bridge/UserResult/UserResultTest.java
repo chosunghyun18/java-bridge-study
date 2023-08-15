@@ -10,8 +10,8 @@ public class UserResultTest{
     private String gameClear ;
     private int gameTry ;
     public UserResultTest() {
-        this.upBridge  =  new ArrayList<>(Arrays.asList("   "," X "));
-        this.downBridge =new ArrayList<>(Arrays.asList(" O ","   "));
+        this.upBridge  =  new ArrayList<>(Arrays.asList("   "," X "," O "));
+        this.downBridge =new ArrayList<>(Arrays.asList(" O ","   "," O "));
         this.gameClear = "성공";
         this.gameTry = 2 ;
     }

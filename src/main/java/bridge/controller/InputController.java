@@ -27,13 +27,13 @@ public class InputController {
         }
     }
 
-    public String readMoving() {
+    public String readNextMove() {
         try {
             return inputView.readMoving();
         } catch (IllegalArgumentException e) {
             printErrorMessage(e.getMessage());
             outputController.printMoveInfoMessage();
-            return readMoving();
+            return readNextMove();
         }
     }
 

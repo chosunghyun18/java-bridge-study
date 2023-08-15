@@ -41,9 +41,9 @@ public class BridgeGame {
         String gameCommand = "R";
         while (gameCommand.equals("R")) {
             initUserResult();
-            boolean clearStage = moveOverBridge();
-            if(clearStage) gameCommand = "Q";
-            if(!clearStage) gameCommand = retry();
+            boolean completeStage = moveOverBridge();
+            if(completeStage) gameCommand = "Q";
+            if(!completeStage) gameCommand = retry();
         }
     }
 
@@ -55,7 +55,7 @@ public class BridgeGame {
         int round = 0 ;
         while (bridgeLength != round) {
             outputController.printMoveInfoMessage();
-            String moveCommand = inputController.readMoving();
+            String moveCommand = inputController.readNextMove();
             if(!move(moveCommand,round)) return false;
             round++;
         }

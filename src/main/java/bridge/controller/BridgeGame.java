@@ -59,7 +59,7 @@ public class BridgeGame {
             if(!move(moveCommand,round)) return false;
             round++;
         }
-        user.clearGame();
+        user.crossAllBridge();
         return true;
     }
 

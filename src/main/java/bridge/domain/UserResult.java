@@ -49,7 +49,7 @@ public class UserResult {
         totalGameTry++;
     }
 
-    public void clearGame() {
+    public void crossAllBridge() {
         gameClear = "성공";
     }
 

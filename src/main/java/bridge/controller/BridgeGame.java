@@ -4,6 +4,7 @@ import bridge.model.Bridge;
 import bridge.model.BridgeMaker;
 import bridge.model.Footprint;
 import bridge.model.Player;
+import bridge.view.InputView;
 
 import java.util.ArrayList;
 
@@ -13,13 +14,14 @@ import java.util.ArrayList;
 public class BridgeGame {
     public static int INITIALIZE_PLAYER_LOCATION = 0;
     private BridgeMaker bridgeMaker;
+    private InputView input;
 
     public BridgeGame() {
     }
 
     private Bridge bridgeInit() {
         // bridge size alarm required
-        int bridgeSize = 9;// bridge size input required
+        int bridgeSize = input.readBridgeSize();
         return new Bridge(bridgeMaker.makeBridge(bridgeSize));
     }
 
@@ -37,7 +39,7 @@ public class BridgeGame {
         player.intializeData();
         while (true) {
             //movement alarm required
-            String movement = "U";// input method required
+            String movement = input.readMoving();
             move(movement, bridge, player);
             if(player.getFootprint().isEnd()){
                 retry(bridge, player);
@@ -67,7 +69,7 @@ public class BridgeGame {
      */
     public void retry(Bridge bridge, Player player) {
         // retry alarm required
-        String answer = "Q";// retry input required
+        String answer = input.readGameCommand();
         if (answer.equals("R")) {
             player.retryTimeUp();
             inGame(bridge, player);

@@ -10,7 +10,7 @@ public class Footprint {
         this.footprint = footprint;
     }
 
-    private void makeNewFootprint(boolean isCorrect) {
+    public void makeNewFootprint(boolean isCorrect) {
         if (isCorrect) {
             footprint.add("O");
         }
@@ -21,5 +21,9 @@ public class Footprint {
 
     public List<String> getFootprint() {
         return footprint;
+    }
+
+    public boolean isEnd() {
+        return footprint.contains("X");
     }
 }

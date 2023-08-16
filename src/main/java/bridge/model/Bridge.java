@@ -15,4 +15,5 @@ public class Bridge {
         return bridgeCheck.get(location).equals(movement);
     }
 
+
 }

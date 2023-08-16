@@ -33,5 +33,13 @@ public class Player {
         retryTime = 0;
     }
 
+    public void retryTimeUp() {
+        retryTime +=1;
+    }
+
+    public int getRetryTime() {
+        return retryTime;
+    }
+
 
 }

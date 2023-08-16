@@ -25,10 +25,12 @@ public class BridgeGame {
 
     public void gameStart() {
         // game start alarm required
-        Bridge bridge = bridgeInit();
         Player player = new Player(new Footprint(new ArrayList<>()), INITIALIZE_PLAYER_LOCATION);
         player.initializeTryTime();
+        Bridge bridge = bridgeInit();
+
         inGame(bridge, player);
+        result(bridge, player);
     }
 
     private void inGame(Bridge bridge, Player player) {
@@ -37,6 +39,10 @@ public class BridgeGame {
             //movement alarm required
             String movement = "U";// input method required
             move(movement, bridge, player);
+            if(player.getFootprint().isEnd()){
+                retry(bridge, player);
+            }
+            break;
         }
     }
 
@@ -51,9 +57,7 @@ public class BridgeGame {
         player.getFootprint().makeNewFootprint(isCorrect);
         player.moveForword();
         // footprint print required
-        if(player.getFootprint().isEnd()){
-            retry(bridge, player);
-        }
+
     }
 
     /**
@@ -65,8 +69,16 @@ public class BridgeGame {
         // retry alarm required
         String answer = "Q";// retry input required
         if (answer.equals("R")) {
+            player.retryTimeUp();
             inGame(bridge, player);
         }
+    }
+
+    public void result(Bridge bridge, Player player) {
+        // total game result alarm required
+        // game result array view required
+        // whether the game success or fails view required
+        // total retry time view required
     }
 
 }

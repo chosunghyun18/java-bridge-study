@@ -53,13 +53,12 @@ public class BridgeGame {
 
     private boolean moveOverBridge() {
         int round = 0 ;
-        while (user.crossAllBridge(bridgeLength)) {
+        while (!user.crossAllBridge(bridgeLength)) {
             outputController.printMoveInfoMessage();
             String moveCommand = inputController.readNextMove();
             if(!move(moveCommand,round)) return false;
             round++;
         }
-        user.clearStage();
         return true;
     }
 

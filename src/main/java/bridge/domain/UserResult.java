@@ -44,18 +44,17 @@ public class UserResult {
         }
     }
     public boolean crossAllBridge(int bridgeSizeToCross) {
-        return upBridge.size() != bridgeSizeToCross;
+        if(upBridge.size() == bridgeSizeToCross){
+            gameClear = "성공";
+            return true;
+        };
+        return false;
     }
     public void initBridgeForGame() {
         this.upBridge = new ArrayList<>();
         this.downBridge = new ArrayList<>();
         totalGameTry++;
     }
-
-    public void clearStage() {
-        gameClear = "성공";
-    }
-
     public String getGameClearForResponse() {
         return gameClear;
     }

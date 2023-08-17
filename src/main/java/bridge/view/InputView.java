@@ -13,28 +13,22 @@ public class InputView {
     /**
      * 다리의 길이를 입력받는다.
      */
-    public int readBridgeSize() {
-        String input = Console.readLine();
-        int bridgeSize = InputValidation.isNumeric(input);
-        InputValidation.isNaturalNumber(bridgeSize);
-        return bridgeSize;
+    public String readBridgeSize() {
+        return Console.readLine();
     }
 
     /**
      * 사용자가 이동할 칸을 입력받는다.
      */
     public String readMoving() {
-        String input = Console.readLine();
-        InputValidation.checkMovementValid(input);
-        return input;
+        return Console.readLine();
     }
 
     /**
      * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
      */
     public String readGameCommand() {
-        String input = Console.readLine();
-        InputValidation.checkRestartMethodValid(input);
-        return input;
+
+        return Console.readLine();
     }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Player {
     private Footprint footprint;
     private int currentPlayerLocation;
-    private int retryTime=0;
+    private int retryTime=1;
     private boolean isSuccess = false;
 
     public Player(Footprint footprint, int currentLocation) {
@@ -30,9 +30,6 @@ public class Player {
         return currentPlayerLocation;
     }
 
-    public void initializeTryTime() {
-        retryTime = 1;
-    }
 
     public void retryTimeUp() {
         retryTime +=1;

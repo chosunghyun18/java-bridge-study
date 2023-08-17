@@ -1,8 +1,6 @@
 package bridge.controller;
 
 import bridge.model.*;
-import bridge.view.InputView;
-import bridge.view.OutputView;
 
 import java.util.ArrayList;
 
@@ -12,25 +10,22 @@ import java.util.ArrayList;
 public class BridgeGame {
     public static int INITIALIZE_PLAYER_LOCATION = 0;
     private final BridgeMaker bridgeMaker;
-    private final InputView input;
-    private final OutputView output;
+    private final IOController ioController;
 
     public BridgeGame() {
         this.bridgeMaker = new BridgeMaker(new BridgeRandomNumberGenerator());
-        this.input = new InputView();
-        this.output = new OutputView();
+        this.ioController = new IOController();
     }
 
     private Bridge bridgeInit() {
-        output.bridgeSizeInputNotifivcate();
-        int bridgeSize = input.readBridgeSize();
+        int bridgeSize = ioController.bridgeSizeIn();
         return new Bridge(bridgeMaker.makeBridge(bridgeSize));
     }
 
     public void gameStart() {
-        output.gameStartNotificate();
+        ioController.gameStartNotificate();
+
         Player player = new Player(new Footprint(new ArrayList<>()), INITIALIZE_PLAYER_LOCATION);
-        player.initializeTryTime();
         Bridge bridge = bridgeInit();
 
         inGame(bridge, player);
@@ -39,19 +34,19 @@ public class BridgeGame {
     private void inGame(Bridge bridge, Player player) {
         player.intializeData();
         while (true) {
-            output.movementNotificate();
-            String movement = input.readMoving();
+            String movement = ioController.readMovement();
             move(movement, bridge, player);
             if(player.getFootprint().isEnd()){
                 retry(bridge, player);
             }
             if(player.getFootprint().done(bridge.getBridge().size())){
                 player.success();
-                output.printResult(bridge, player);
+                ioController.resultNotificate(bridge, player);
                 break;
             }
         }
     }
+
 
 
     /**
@@ -63,7 +58,7 @@ public class BridgeGame {
         boolean isCorrect = bridge.isMovementCorrect(movement, player.getLocation());
         player.getFootprint().makeNewFootprint(isCorrect);
         player.moveForword();
-        output.printMap(player.getFootprint(), bridge);
+        ioController.printCurrentMap(player, bridge);
     }
 
     /**
@@ -72,9 +67,8 @@ public class BridgeGame {
      * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
     public void retry(Bridge bridge, Player player) {
-        output.printResult(bridge, player);
-        output.retryNotificate();
-        String answer = input.readGameCommand();
+        ioController.retryNotificate(player, bridge);
+        String answer = ioController.readCommand();
         if (answer.equals("R")) {
             player.retryTimeUp();
             inGame(bridge, player);

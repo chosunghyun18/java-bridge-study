@@ -1,7 +1,11 @@
 package bridge;
 
+import bridge.domain.Direction;
+import bridge.domain.Direction.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -22,17 +26,8 @@ public class BridgeMaker {
         List<String> bridge = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             int bridgeValue = bridgeNumberGenerator.generate();
-            bridge.add(bridgeConvertor(bridgeValue));
+            bridge.add(Direction.findLabel(bridgeValue));
         }
         return bridge;
-    }
-
-    // TODO: Enum으로 바꾸기
-    private String bridgeConvertor(int bridgeValue) {
-        if (bridgeValue == 0) {
-            return "D";
-        }else {
-            return "U";
-        }
     }
 }

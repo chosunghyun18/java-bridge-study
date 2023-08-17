@@ -10,7 +10,7 @@ public class PlayerInfo {
 
     public PlayerInfo(){
         this.playerAnswer = new ArrayList<>();
-        this.tryNumber = 0;
+        this.tryNumber = 1;
         this.answerMap = initMap();
     }
 
@@ -18,6 +18,7 @@ public class PlayerInfo {
     public void prepareRetry() {
         playerAnswer.clear();
         answerMap.clear();
+        answerMap = initMap();
         tryNumber++;
     }
 
@@ -31,7 +32,7 @@ public class PlayerInfo {
         int size = playerAnswer.size();
         if(position.equals(answerBridge.get(size))){
             playerAnswer.add(true);
-            addAnswerMap(position, "0");
+            addAnswerMap(position, "O");
             return true;
         }else{
             playerAnswer.add(false);

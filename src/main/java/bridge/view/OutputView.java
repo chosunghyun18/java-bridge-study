@@ -1,8 +1,6 @@
 package bridge.view;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -19,9 +17,10 @@ public class OutputView {
      */
     public void printMap(List<List<String>> answerMap) {
         for(int i=0; i<2; i++){
-            String result = answerMap.get(i).stream().collect(Collectors.joining(" | "));
+            String result = String.join(" | ", answerMap.get(i));
             System.out.println("[ "+ result+ " ]");
         }
+        System.out.println();
     }
 
     /**

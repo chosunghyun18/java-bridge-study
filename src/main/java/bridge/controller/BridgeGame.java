@@ -40,7 +40,7 @@ public class BridgeGame {
         BridgeRandomNumberGenerator bridgeRandomNumberGenerator = new BridgeRandomNumberGenerator();
         BridgeMaker bridgeMaker = new BridgeMaker(bridgeRandomNumberGenerator);
         answerBridge = bridgeMaker.makeBridge(size);
-        //move();
+        move();
     }
 
     /**

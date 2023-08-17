@@ -48,9 +48,14 @@ public class OutputView {
     public void printResult(UserBridge userBridge, int attempts) {
         System.out.println("최종 게임 결과");
         printMap(userBridge);
-        boolean isSuccess = !userBridge.getUpBridge().contains("X") && !userBridge.getDownBridge().contains("X");
-        System.out.println("게임 성공 여부: " + (isSuccess ? "성공" : "실패"));
+        System.out.println("게임 성공 여부: " + isGameWin(userBridge.isWin()));
         System.out.println("총 시도한 횟수: " + attempts);
-//        System.out.println("총 시도한 횟수: " + userBridge.getCount());
+    }
+
+    private String isGameWin(boolean isSuccessGame) {
+        if (isSuccessGame) {
+            return "성공";
+        }
+        return "실패";
     }
 }

@@ -12,30 +12,42 @@ public class UserBridge {
       this.downBridge = new ArrayList<>();
    }
 
-   public void update(String direction, boolean isCorrect) {
+   public void update(String direction, boolean isSuccess) {
       if (direction.equals("U")){
-         if (isCorrect) {
-            upBridge.add("O");
-            downBridge.add(" ");
-         } else {
-            upBridge.add("X");
-            downBridge.add(" ");
-         }
+         addUpBridge(isSuccess);
       }
       if (direction.equals("D")){
-         if (isCorrect) {
-            downBridge.add("O");
-            upBridge.add(" ");
-         } else {
-            downBridge.add("X");
-            upBridge.add(" ");
-         }
+         addDownBridge(isSuccess);
       }
+   }
+
+   private void addUpBridge(boolean isSuccess) {
+      if (isSuccess) {
+         upBridge.add("O");
+      }
+      if (!isSuccess) {
+         upBridge.add("X");
+      }
+      downBridge.add(" ");
+   }
+
+   private void addDownBridge(boolean isSuccess) {
+      if (isSuccess) {
+         downBridge.add("O");
+      }
+      if (!isSuccess) {
+         downBridge.add("X");
+      }
+      upBridge.add(" ");
    }
 
    public void initUserBridge() {
       upBridge.clear();
       downBridge.clear();
+   }
+
+   public boolean isWin() {
+      return !upBridge.contains("X") && !downBridge.contains("X");
    }
 
    public List<String> getDownBridge() {

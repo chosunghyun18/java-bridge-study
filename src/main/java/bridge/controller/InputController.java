@@ -17,4 +17,22 @@ public class InputController {
             return readBridgeSizeController();
         }
     }
+
+    public String readMovingController(){
+        try{
+            return inputView.readMoving();
+        }catch(IllegalArgumentException e){
+            System.out.println("[ERROR] "+ e);
+            return readMovingController();
+        }
+    }
+
+    public String readGameCommandController(){
+        try{
+            return inputView.readGameCommand();
+        }catch(IllegalArgumentException e){
+            System.out.println("[ERROR]" + e);
+            return readGameCommandController();
+        }
+    }
 }

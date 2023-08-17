@@ -1,4 +1,4 @@
-package bridge;
+package bridge.model;
 
 
 /**수정 불가능**/

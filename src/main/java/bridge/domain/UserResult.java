@@ -43,13 +43,16 @@ public class UserResult {
             downBridge.add(" X ");
         }
     }
+    public boolean crossAllBridge(int bridgeSizeToCross) {
+        return upBridge.size() != bridgeSizeToCross;
+    }
     public void initBridgeForGame() {
         this.upBridge = new ArrayList<>();
         this.downBridge = new ArrayList<>();
         totalGameTry++;
     }
 
-    public void crossAllBridge() {
+    public void clearStage() {
         gameClear = "성공";
     }
 

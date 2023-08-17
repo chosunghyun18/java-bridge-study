@@ -15,7 +15,8 @@ public class BridgeController {
    private final BridgeGame bridgeGame = new BridgeGame();
    private final InputView inputView = new InputView();
    private final OutputView outputView = new OutputView();
-   private int attemps = 1;
+   private boolean gameRunning = true;
+   private int attempts = 1;
 
    public void run() {
       try {
@@ -35,25 +36,36 @@ public class BridgeController {
    }
 
    private void playGame() {
-      while(!bridgeGame.isComplete()) {
-         // 입력받아서 건널수있는지 확인하고 결과도 저장
-         String inputValue = inputView.readMoving();
-         boolean isCorrectMove = bridgeGame.move(inputValue);
-         // 현재 진행상태 출력
-         outputView.printMap(bridgeGame.getUserBridge());
-         //
-         if (!isCorrectMove) {
-            outputView.printRetryOrExit();
-            String inputCommand = inputView.readGameCommand();
-            if (inputCommand.equals("R")){
-               bridgeGame.retry();
-               attemps++;
-            }
-            else {
-               break;
-            }
-         }
+      while(isGameEnd()) {
+         playGround();
       }
-      outputView.printResult(bridgeGame.getUserBridge(), attemps);
+      outputView.printResult(bridgeGame.getUserBridge(), attempts);
+   }
+
+   private void playGround() {
+      boolean isSuccessMove = bridgeGame.move(inputView.readMoving());
+      outputView.printMap(bridgeGame.getUserBridge());
+      if (!isSuccessMove) {
+         playFailGround();
+      }
+   }
+
+   private void playFailGround() {
+      outputView.printRetryOrExit();
+      String commend = inputView.readGameCommand();
+      if (commend.equals("R")) {
+         bridgeGame.retry();
+         attempts++;
+      }
+      if (commend.equals("Q")) {
+         gameRunning = false;
+      }
+   }
+
+   private boolean isGameEnd() {
+      if (bridgeGame.isComplete()) {
+         gameRunning = false;
+      }
+      return gameRunning;
    }
 }

@@ -15,11 +15,6 @@ public class BridgeGame {
     private List<String> answerBridge = new ArrayList<>();
 
     private final UserBridge userBridge = new UserBridge();
-
-    public int getGround() {
-        return ground;
-    }
-
     private int ground = 0;
 
     public void createBridge(int size) {

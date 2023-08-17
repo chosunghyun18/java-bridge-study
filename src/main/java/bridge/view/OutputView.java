@@ -24,26 +24,20 @@ public class OutputView {
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
     public void printMap(UserBridge userBridge) {
-        List<String> upBridge = userBridge.getUpBridge();
-        List<String> downBridge = userBridge.getDownBridge();
-        System.out.print("[ ");
-        for (int i = 0; i < upBridge.size(); i++) {
-            System.out.print(upBridge.get(i));
-            if (i != upBridge.size() - 1) {
-                System.out.print(" | ");
-            }
-        }
-        System.out.println(" ]");
-
-        System.out.print("[ ");
-        for (int i = 0; i < downBridge.size(); i++) {
-            System.out.print(downBridge.get(i));
-            if (i != downBridge.size() - 1) {
-                System.out.print(" | ");
-            }
-        }
-        System.out.println(" ]");
+        printSingleMap(userBridge.getUpBridge());
+        printSingleMap(userBridge.getDownBridge());
         System.out.println();
+    }
+
+    private void printSingleMap(List<String> bridge) {
+        System.out.print("[ ");
+        for (int i = 0; i < bridge.size(); i++) {
+            System.out.print(bridge.get(i));
+            if (i != bridge.size() - 1) {
+                System.out.print(" | ");
+            }
+        }
+        System.out.println(" ]");
     }
 
     /**

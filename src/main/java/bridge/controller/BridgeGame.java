@@ -63,7 +63,7 @@ public class BridgeGame {
     }
 
     private boolean move(String moveCommand,int round) {
-        boolean canGo = user.matchBridge(moveCommand,answerBridge,round);
+        boolean canGo = user.matchBridge(moveCommand,answerBridge.get(round));
         outputController.printUserBridge(user);
         return  canGo;
     }

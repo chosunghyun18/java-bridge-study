@@ -15,15 +15,16 @@ public class UserResult {
         this.totalGameTry = 0;
     }
 
-    public boolean matchBridge(String command, List<String> answerBridge, int checkIndex) {
-        if (command.equals(answerBridge.get(checkIndex))) {
+    public boolean matchBridge(String command, String answerBridge) {
+        if (command.equals(answerBridge)) {
             checkCommandMatch(command);
             return true;
         }
-        checkCommandWrong(command) ;
+        checkCommandWrong(command);
         return false;
     }
-    private void  checkCommandMatch(String command) {
+
+    private void checkCommandMatch(String command) {
         if (command.equals("U")) {
             upBridge.add(" O ");
             downBridge.add("   ");
@@ -33,7 +34,8 @@ public class UserResult {
             downBridge.add(" O ");
         }
     }
-    private void  checkCommandWrong(String command) {
+
+    private void checkCommandWrong(String command) {
         if (command.equals("U")) {
             upBridge.add(" X ");
             downBridge.add("   ");
@@ -43,18 +45,21 @@ public class UserResult {
             downBridge.add(" X ");
         }
     }
+
     public boolean crossAllBridge(int bridgeSizeToCross) {
-        if(upBridge.size() == bridgeSizeToCross){
+        if (upBridge.size() == bridgeSizeToCross) {
             gameClear = "성공";
             return true;
-        };
+        }
         return false;
     }
+
     public void initBridgeForGame() {
         this.upBridge = new ArrayList<>();
         this.downBridge = new ArrayList<>();
         totalGameTry++;
     }
+
     public String getGameClearForResponse() {
         return gameClear;
     }

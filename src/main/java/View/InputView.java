@@ -1,17 +1,13 @@
-package bridge.View;
+package View;
 
-import bridge.Error.ArgumentError;
+import Error.ArgumentError;
 import camp.nextstep.edu.missionutils.Console;
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 public class InputView {
-    private final ArgumentError argumentError;
-
-    public InputView() {
-        this.argumentError = new ArgumentError();
-    }
+    private final ArgumentError argumentError = new ArgumentError();
 
     /**
      * 다리의 길이를 입력받는다.

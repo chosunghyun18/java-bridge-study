@@ -19,11 +19,15 @@ public class Footprint {
         }
     }
 
-    public List<String> getFootprint() {
+    public ArrayList<String> getFootprint() {
         return footprint;
     }
 
     public boolean isEnd() {
         return footprint.contains("X");
+    }
+
+    public boolean done(int bridgeSize) {
+        return footprint.size() == bridgeSize;
     }
 }

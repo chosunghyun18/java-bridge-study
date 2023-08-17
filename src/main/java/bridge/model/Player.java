@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Player {
     private Footprint footprint;
     private int currentPlayerLocation;
-    private int retryTime;
+    private int retryTime=0;
+    private boolean isSuccess = false;
 
     public Player(Footprint footprint, int currentLocation) {
         this.footprint = footprint;
@@ -30,7 +31,7 @@ public class Player {
     }
 
     public void initializeTryTime() {
-        retryTime = 0;
+        retryTime = 1;
     }
 
     public void retryTimeUp() {
@@ -41,5 +42,14 @@ public class Player {
         return retryTime;
     }
 
+    public void success() {
+        isSuccess = true;
+    }
 
+    public String getIsSuccess() {
+        if(isSuccess){
+            return "성공";
+        }
+            return "실패";
+    }
 }

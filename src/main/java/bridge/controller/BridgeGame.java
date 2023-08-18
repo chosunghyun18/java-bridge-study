@@ -1,8 +1,6 @@
 package bridge.controller;
 
-import bridge.domain.BridgeMaker;
-import bridge.domain.BridgeNumberGenerator;
-import bridge.domain.NumberGenerator;
+import bridge.domain.BridgeBuilder;
 import bridge.domain.UserResult;
 
 import java.util.List;
@@ -30,9 +28,7 @@ public class BridgeGame {
     private void makeBridge() {
         outputController.printBridgeSizeInfoMessage();
         int givenBridgeLength = inputController.readBridgeSize();
-        BridgeNumberGenerator numberGenerator = new NumberGenerator(givenBridgeLength);
-        BridgeMaker bridgeMaker = new BridgeMaker(numberGenerator);
-        answerBridge = bridgeMaker.makeBridge(givenBridgeLength);
+        answerBridge = BridgeBuilder.makeAnswerBridge(givenBridgeLength);
     }
     public void processGame() {
         String gameCommand = "R";
@@ -64,7 +60,7 @@ public class BridgeGame {
         outputController.printUserBridge(user);
         return  canGo;
     }
-    private String nextAnswerStep(int round){
+    private String nextAnswerStep(int round) {
         return answerBridge.get(round);
     }
     private String retry() {

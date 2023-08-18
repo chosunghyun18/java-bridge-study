@@ -27,4 +27,9 @@ public class BridgeMaker {
         }
         return result;
     }
+    public static List<String> makeAnswerBridge(int givenBridgeLength) {
+        BridgeNumberGenerator numberGenerator = new NumberGenerator(givenBridgeLength);
+        BridgeMaker bridgeMaker = new BridgeMaker(numberGenerator);
+        return bridgeMaker.makeBridge(givenBridgeLength);
+    }
 }

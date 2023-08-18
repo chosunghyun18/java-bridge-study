@@ -11,7 +11,7 @@ import java.util.List;
  * 다리 건너기 게임을 관리하는 클래스
  */
 public class BridgeGame {
-    private int bridgeLength;
+
     private List<String> answerBridge ;
     private final UserResult user;
     private final OutputController outputController;
@@ -29,10 +29,10 @@ public class BridgeGame {
 
     private void makeBridge() {
         outputController.printBridgeSizeInfoMessage();
-        bridgeLength = inputController.readBridgeSize();
-        BridgeNumberGenerator numberGenerator = new NumberGenerator(bridgeLength);
+        int givenBridgeLength = inputController.readBridgeSize();
+        BridgeNumberGenerator numberGenerator = new NumberGenerator(givenBridgeLength);
         BridgeMaker bridgeMaker = new BridgeMaker(numberGenerator);
-        answerBridge = bridgeMaker.makeBridge(bridgeLength);
+        answerBridge = bridgeMaker.makeBridge(givenBridgeLength);
     }
     public void processGame() {
         String gameCommand = "R";
@@ -50,7 +50,7 @@ public class BridgeGame {
 
     private boolean moveOverBridge() {
         int round = 0 ;
-        while (user.isCrossBridge(bridgeLength)) {
+        while (user.isCrossBridge(answerBridge)) {
             outputController.printMoveInfoMessage();
             String moveCommand = inputController.readNextMove();
             if(!move(moveCommand,round)) return false;

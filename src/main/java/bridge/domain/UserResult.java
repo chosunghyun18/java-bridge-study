@@ -48,8 +48,8 @@ public class UserResult {
         }
     }
 
-    public boolean isCrossBridge(int bridgeSizeToCross) {
-        if (upBridge.size() == bridgeSizeToCross) {
+    public boolean isCrossBridge(List<String> answerBridge) {
+        if (upBridge.size() == answerBridge.size()) {
             gameClear = "성공";
             return false;
         }

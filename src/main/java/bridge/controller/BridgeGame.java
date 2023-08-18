@@ -50,7 +50,7 @@ public class BridgeGame {
 
     private boolean moveOverBridge() {
         int round = 0 ;
-        while (user.isCrossBridge(answerBridge)) {
+        while (user.isCrossEntireBridge(answerBridge)) {
             outputController.printMoveInfoMessage();
             String moveCommand = inputController.readNextMove();
             if(!move(moveCommand,round)) return false;

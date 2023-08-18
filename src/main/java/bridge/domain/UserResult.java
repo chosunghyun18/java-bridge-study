@@ -48,7 +48,7 @@ public class UserResult {
         }
     }
 
-    public boolean isCrossBridge(List<String> answerBridge) {
+    public boolean isCrossEntireBridge(List<String> answerBridge) {
         if (upBridge.size() == answerBridge.size()) {
             gameClear = "성공";
             return false;

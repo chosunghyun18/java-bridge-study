@@ -38,12 +38,8 @@ public class BridgeGame {
         while (gameCommand.equals("R")) {
             initUserResult();
             boolean completeStage = moveOverBridge();
-            if (completeStage) {
-                gameCommand = "Q";
-            }
-            if (!completeStage) {
-                gameCommand = retry();
-            }
+            if (completeStage) gameCommand = "Q";
+            if (!completeStage) gameCommand = retry();
         }
     }
 
@@ -56,9 +52,7 @@ public class BridgeGame {
         while (user.isCrossEntireBridge(answerBridge)) {
             outputController.printMoveInfoMessage();
             String moveCommand = inputController.readNextMove();
-            if (!move(moveCommand, round)) {
-                return false;
-            }
+            if (!move(moveCommand, round)) return false;
             round++;
         }
         return true;

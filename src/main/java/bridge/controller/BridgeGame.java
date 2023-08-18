@@ -10,10 +10,11 @@ import java.util.List;
  */
 public class BridgeGame {
 
-    private List<String> answerBridge ;
+    private List<String> answerBridge;
     private final UserResult user;
     private final OutputController outputController;
     private final InputController inputController;
+
     private BridgeGame() {
         user = new UserResult();
         outputController = new OutputController();
@@ -21,6 +22,7 @@ public class BridgeGame {
         outputController.printStartInfoMessage();
         makeBridge();
     }
+
     public static BridgeGame startGame() {
         return new BridgeGame();
     }
@@ -30,13 +32,18 @@ public class BridgeGame {
         int givenBridgeLength = inputController.readBridgeSize();
         answerBridge = BridgeBuilder.makeAnswerBridge(givenBridgeLength);
     }
+
     public void processGame() {
         String gameCommand = "R";
         while (gameCommand.equals("R")) {
             initUserResult();
             boolean completeStage = moveOverBridge();
-            if(completeStage) gameCommand = "Q";
-            if(!completeStage) gameCommand = retry();
+            if (completeStage) {
+                gameCommand = "Q";
+            }
+            if (!completeStage) {
+                gameCommand = retry();
+            }
         }
     }
 
@@ -45,28 +52,33 @@ public class BridgeGame {
     }
 
     private boolean moveOverBridge() {
-        int round = 0 ;
+        int round = 0;
         while (user.isCrossEntireBridge(answerBridge)) {
             outputController.printMoveInfoMessage();
             String moveCommand = inputController.readNextMove();
-            if(!move(moveCommand,round)) return false;
+            if (!move(moveCommand, round)) {
+                return false;
+            }
             round++;
         }
         return true;
     }
 
-    private boolean move(String moveCommand,int round) {
-        boolean canGo = user.moveNextStep(moveCommand,nextAnswerStep(round));
+    private boolean move(String moveCommand, int round) {
+        boolean canGo = user.moveNextStep(moveCommand, nextAnswerStep(round));
         outputController.printUserBridge(user);
-        return  canGo;
+        return canGo;
     }
+
     private String nextAnswerStep(int round) {
         return answerBridge.get(round);
     }
+
     private String retry() {
         outputController.printRestartInputInfoMessage();
         return inputController.readGameCommand();
     }
+
     public void showGameResult() {
         outputController.printResult(user);
     }

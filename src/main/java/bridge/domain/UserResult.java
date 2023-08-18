@@ -15,16 +15,18 @@ public class UserResult {
         this.totalGameTry = 0;
     }
 
-    public boolean matchBridge(String command, String answerBridge) {
-        if (command.equals(answerBridge)) {
-            checkCommandMatch(command);
+    public boolean moveNextStep(String moveCommand, String nextAnswerStep) {
+        if (userCanMoveNextStep(moveCommand,nextAnswerStep)) {
+            checkCanGo(moveCommand);
             return true;
         }
-        checkCommandWrong(command);
+        checkWrongMove(moveCommand);
         return false;
     }
-
-    private void checkCommandMatch(String command) {
+    private boolean userCanMoveNextStep(String moveCommand, String nextAnswerStep) {
+        return moveCommand.equals(nextAnswerStep);
+    }
+    private void checkCanGo(String command) {
         if (command.equals("U")) {
             upBridge.add(" O ");
             downBridge.add("   ");
@@ -35,7 +37,7 @@ public class UserResult {
         }
     }
 
-    private void checkCommandWrong(String command) {
+    private void checkWrongMove(String command) {
         if (command.equals("U")) {
             upBridge.add(" X ");
             downBridge.add("   ");
@@ -46,12 +48,12 @@ public class UserResult {
         }
     }
 
-    public boolean crossAllBridge(int bridgeSizeToCross) {
+    public boolean isCrossBridge(int bridgeSizeToCross) {
         if (upBridge.size() == bridgeSizeToCross) {
             gameClear = "성공";
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public void initBridgeForGame() {

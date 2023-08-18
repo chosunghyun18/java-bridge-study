@@ -2,27 +2,24 @@ package bridge.controller;
 
 import bridge.domain.BridgeMaker;
 import bridge.domain.BridgeNumberGenerator;
-
 import bridge.domain.NumberGenerator;
-
 import bridge.domain.UserResult;
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 public class BridgeGame {
-    private final UserResult user;
-    private List<String> answerBridge ;
     private int bridgeLength;
+    private List<String> answerBridge ;
+    private final UserResult user;
     private final OutputController outputController;
     private final InputController inputController;
     private BridgeGame() {
-        outputController = new OutputController();
-        answerBridge = new ArrayList<>();
-        inputController = new InputController();
         user = new UserResult();
+        outputController = new OutputController();
+        inputController = new InputController();
         outputController.printStartInfoMessage();
         makeBridge();
     }
@@ -53,7 +50,7 @@ public class BridgeGame {
 
     private boolean moveOverBridge() {
         int round = 0 ;
-        while (!user.crossAllBridge(bridgeLength)) {
+        while (user.isCrossBridge(bridgeLength)) {
             outputController.printMoveInfoMessage();
             String moveCommand = inputController.readNextMove();
             if(!move(moveCommand,round)) return false;
@@ -63,11 +60,13 @@ public class BridgeGame {
     }
 
     private boolean move(String moveCommand,int round) {
-        boolean canGo = user.matchBridge(moveCommand,answerBridge.get(round));
+        boolean canGo = user.moveNextStep(moveCommand,nextAnswerStep(round));
         outputController.printUserBridge(user);
         return  canGo;
     }
-
+    private String nextAnswerStep(int round){
+        return answerBridge.get(round);
+    }
     private String retry() {
         outputController.printRestartInputInfoMessage();
         return inputController.readGameCommand();
